@@ -36,7 +36,7 @@ class Todo {
 
   get(indexOfTodo){
     if(indexOfTodo < 0 || indexOfTodo > this.todos.length){
-      return;
+      return null;
     }
     return this.todos[indexOfTodo];
   }
