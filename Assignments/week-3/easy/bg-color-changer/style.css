@@ -1,0 +1,64 @@
+body {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    height: 100vh;
+    margin: 0;
+    transition: background-color 0.3s ease;
+}
+
+.main {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 15px;
+    border-radius: 4px;
+    box-shadow: 0 5px 10px lightslategrey;
+    background-color: whitesmoke;
+}
+
+.color-buttons {
+    display: flex;
+    gap: 1rem;
+    margin-bottom: 1rem;    
+}
+
+.color-buttons button {
+    padding: 0.5rem 1rem;
+    font-size: 1rem;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+}
+
+.color-input {
+    display: flex;
+    gap: 0.5rem;
+}
+
+.color-input input {
+    padding: 0.5rem;
+    font-size: 1rem;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+}
+
+.color-input button {
+    padding: 0.5rem 1rem;
+    font-size: 1rem;
+    border: none;
+    border-radius: 4px;
+    background-color: #4CAF50;
+    color: whitesmoke;
+    cursor: pointer;
+}
+
+#custom-colors {
+    display: flex;
+    flex-direction: row;
+    gap: 20px;
+}
+
+
