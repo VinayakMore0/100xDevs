@@ -33,3 +33,16 @@ export const quizData = [{
 },
 // you can add more quiz here
 ]
+
+// Function to get the current question data
+export function getCurrentQuestion(index) {
+    return quizData[index];
+}
+  
+  // Function to check the answer
+export function checkAnswer(questionIndex, selectedAnswer) {
+    const correctAnswer = quizData[questionIndex].correct;
+    return selectedAnswer === correctAnswer;
+
+
+}
