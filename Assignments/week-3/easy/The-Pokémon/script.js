@@ -1,80 +1,77 @@
-// Get form elements
-const form = document.getElementById('pokemon-form');
-const numCardsInput =   document.getElementById('num-cards');
-const categorySelect = document.getElementById('category');
-const submitBtn = document.getElementById('submit-btn');
-const pokemonCardsContainer = document.getElementById('pokemon-cards');
+document.addEventListener('DOMContentLoaded', () => {
+    // Get form elements
+    const form = document.getElementById('pokemon-form');
+    const numCardsInput = document.getElementById('num-cards');
+    const categorySelect = document.getElementById('category');
+    const submitBtn = document.getElementById('submit-btn');
+    const pokemonCardsContainer = document.getElementById('pokemon-cards');
 
-// API endpoint base URL
-const apiBaseUrl = 'https://pokeapi.co/api/v2/pokemon/';
+    // Check if elements exist
+    if (!form || !numCardsInput || !categorySelect || !submitBtn || !pokemonCardsContainer) {
+        alert("Required elements not found. Check your HTML IDs.");
+        console.error('Required elements not found. Check your HTML IDs.');
+        return;
+    }
 
-// Category to type mapping (add more as needed)
-const categoryToType = {
-    'all': '',
-    'normal': 'normal',
-    'fire': 'fire',
-    'water': 'water',
-    'grass': 'grass'
-};
+    // API endpoint base URL
+    const apiBaseUrl = 'https://pokeapi.co/api/v2/pokemon/';
 
-// Handle form submission 
-form.addEventListener('submit', (e) => {
-    e.preventDefault();
-    const numCards = parseInt(numCardsInput.value);
-    const selectCategory = categorySelect.value;
-    const targetType = categoryToType[selectCategory];
+    // Category to type mapping
+    const categoryToType = {
+        'all': '',
+        'normal': 'normal',
+        'fire': 'fire',
+        'water': 'water',
+        'grass': 'grass'
+    };
 
-    // Fetch and render Pokémon
-    fetchPokemonCards(numCards, targetType);
-});
+    // Handle form submission 
+    form.addEventListener('submit', async (e) => {
+        e.preventDefault();
+        const pokemonNumber = parseInt(numCardsInput.value);
+        const selectCategory = categorySelect.value;
+        const targetType = categoryToType[selectCategory];
 
-// Fetch Pokémon cards from API and render them
-async function fetchPokemonCards(numCards, type) {
-    pokemonCardsContainer.innerHTML = ''; // Clear previous cards
-
-    for(let i = 1; i <= numCards; i++) {
         try {
-            const response = await fetch(`${apiBaseUrl}${i}`);
+            const response = await fetch(`${apiBaseUrl}${pokemonNumber}`);
             const pokemonData = await response.json();
-            // Filter by type (if selected)
-            if (type && !pokemonData.types.some((t) => t.type.name === type)) {
-                continue; // Skip if type does't match
+            
+            // Check if type matches (if a specific type is selected)
+            if (targetType && !pokemonData.types.some(t => t.type.name === targetType)) {
+                pokemonCardsContainer.innerHTML = '<p>No Pokemon of selected type found with this number.</p>';
+                return;
             }
 
-            // Render Pokémon card
-
+            // Clear previous cards and render the new one
+            pokemonCardsContainer.innerHTML = '';
             renderPokemonCard(pokemonData);
         } catch (error) {
-            console.error(`Error fetching Pokémon #${i}:`, error);
+            console.error(`Error fetching Pokémon #${pokemonNumber}:`, error);
+            pokemonCardsContainer.innerHTML = '<p>Pokemon not found. Try a different number.</p>';
         }
+    });
+
+    // Render a single Pokémon card
+    function renderPokemonCard(pokemonData) {
+        const cardHTML = `
+        <div class="pokemon-card">
+            <img src="${pokemonData.sprites.front_default}" alt="${pokemonData.name}">
+            <h2>#${pokemonData.id} ${pokemonData.name}</h2>
+            <p>Type: ${pokemonData.types.map(t => t.type.name).join(', ')}</p>
+        </div>
+        `;
+
+        pokemonCardsContainer.insertAdjacentHTML('beforeend', cardHTML);
     }
-}
 
-// Render a single Pokémon card
-function renderPokemonCard(pokemonData) {
-    const cardHTML = `
-    <div class="pokemon-card">
-        <img src="${pokemonData.sprites.front_default}" alt="${pokemonData.name}">
-        <h2>${pokemonData.name}</h2>
-        <p>Type: ${pokemonData.types.map((t) => t.type.name).join(', ')}</p>
-    </div>
-    `;
-
-    pokemonCardsContainer.insertAdjacentElement('beforeend', cardHTML);
-}
-
-// Handle errors and edge cases
-function fetchPokemonCards(numCards, type) {
-    // ...
-}
-
-// input validation
-// numCardsInput.addEventListener('input', () => {
-//     const numCards = parseInt(numCardsInput.value);
-//     if (numCards < 1 || numCards > 100) {
-//         submitBtn.disabled = true;
-//     } else {
-//         submitBtn.disabled = false;
-//     }
-// });
-
+    // Input validation
+    numCardsInput.addEventListener('input', () => {
+        const number = parseInt(numCardsInput.value);
+        // Pokemon API has around 1000 Pokemon
+        if (number < 1 || number > 1000) {
+            submitBtn.disabled = true;
+        } else {
+            submitBtn.disabled = false;
+        }
+    });
+});
