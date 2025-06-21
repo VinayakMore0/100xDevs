@@ -1,0 +1,23 @@
+{
+  "name": "100xdevs",
+  "version": "1.0.0",
+  "description": "This is my all assignments of cohort3.0,\r you may can refer it.\r Thank You!",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/VinayakMore0/100xDevs.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/VinayakMore0/100xDevs/issues"
+  },
+  "homepage": "https://github.com/VinayakMore0/100xDevs#readme",
+  "dependencies": {
+    "express": "^5.1.0"
+  }
+}
