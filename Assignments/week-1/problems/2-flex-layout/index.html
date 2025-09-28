@@ -1,31 +1,32 @@
-<!-- Do the same as the previous problem but use grid instead of flexbox. -->
 
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Grid Layout</title>
+    <title>Flex Layout</title>
+    <link rel="stylesheet" href="./index.css">
+
     <style>
         .container {
-            display: grid;
-            justify-content: center;
-            margin: 0 auto;
             width: 1200px;
-            grid-template-columns: 1fr 2fr;
-            gap: 10px;
+            margin: 0 auto;
+            display: flex;
         }
 
         .left {
             background-color: red;
+            flex-grow: 1;
         }
 
         .right {
             background-color: blue;
+            flex-grow: 2;
         }
-        
     </style>
 </head>
+
 <body>
     <div class="container">
         <div class="left">
@@ -36,4 +37,5 @@
         </div>
     </div>
 </body>
+
 </html>
