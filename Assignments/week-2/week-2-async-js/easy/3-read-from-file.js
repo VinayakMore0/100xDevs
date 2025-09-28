@@ -5,26 +5,21 @@
 // Try to do an expensive operation below the file read and see how it affects the output. 
 // Make the expensive operation more and more expensive and see how it affects the output. 
 
+const { error } = require('console');
+const fs = require('fs');
 
-const fs = require("fs");
-
-const filePath = 'a.txt';
-
-fs.readFile(filePath, 'utf-8', (err, data) => {
-    if(err) {
-        console.error('Error reading file', err);
+fs.readFile('example.txt', 'utf-8', (err, data) => {
+    if (err) {
+        if (err.code === 'ENOENT') {
+            console.error('Error: File not found!');
+        } else {
+            console.error('Error reading file: ', err);
+        }
         return;
     }
-    console.log('File content', data);
-
+    console.log('File contents: ', data);
 });
 
-function expensiveOperation() {
-    let sum = 0; 
-    for(let i = 0; i < 1e8; i++) {
-        sum += i;
-    }
-    console.log('Expensive operation result', sum);
-}
 
-expensiveOperation();
+
+

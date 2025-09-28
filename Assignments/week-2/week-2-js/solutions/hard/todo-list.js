@@ -1,4 +1,4 @@
-class Todo {
+  class Todo {
     constructor() {
       this.todos = [];
     }

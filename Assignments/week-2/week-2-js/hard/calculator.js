@@ -29,14 +29,12 @@ class Calculator {
     this.result -= number;
   }
 
-  multiply(number) {
+  multiple(number) {
     this.result *= number;
   }
 
   divide(number) {
-    if(number == 0){
-      throw new Error("Invalid expression: Division by zero");
-    }
+    if (number === 0) throw new Error("Invalid expression: Division by zero");
     this.result /= number;
   }
 
@@ -48,28 +46,27 @@ class Calculator {
     return this.result;
   }
 
-  calculator(inputExpression) {
+  calculate(inputExpression) {
     const temp = inputExpression;
     const cleanedExpression = temp.replace(/\s+/g, '');
-    const isValidExpression = /^[0-9+/-*/().]+$/.test(cleanedExpression);
+    const isValidExpression = /^[0-9+\-*/().]+$/.test(cleanedExpression);
 
-    if(!isValidExpression) {
-      throw new Error("Invalid expression.");
-    }
+    if (!isValidExpression) throw new Error("Invalid expression.");
 
-    try{
+    try {
       this.result = eval(inputExpression);
-    }catch (error) {
-      throw new Error("Invalid expression.");
+    } catch (error) {
+      throw new Error("Invalid Expression.")
     }
 
-    if(this.result == Infinity) {
-      throw new Error("Cannot divide a number by 0.");
-    }
+    if (this.result === Infinity) throw new Error ("Cannot divide a number by 0.");
 
     return this.result;
   }
-
 }
+
+calc = new Calculator();
+console.log(calc.calculate("10 +   2 *    (   6 - (4 + 1) / 2) + 7"));
+
 
 module.exports = Calculator;

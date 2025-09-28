@@ -12,24 +12,28 @@
 // hello world my name is raman
 // ```
 
-const fs = require('fs').promises;
 
-async function cleanFile(filename) {
-    try {
-        const content = await fs.readFile(filename, 'utf-8');
+const fs = require('fs');
 
-        const cleanedContent = content.replace(/\s+/g, ' ').trim();
+const cleanFile = () => {
+    fs.readFile('example.txt', 'utf-8', (err, data) => {
+        if (err) {
+            console.error('Error reading the file: ', err);
+            return;
+        }
 
-        await fs.writeFile(filename, cleanedContent);
+        const cleanedContent = data.replace(/\s+/g, ' ').trim();
 
-        console.log(`File ${filename} has been cleaned.`);  
-    } catch (err) {
-        console.error('Error.', error.message);
-    }
+        fs.writeFile(filePath, cleanedContent, 'utf-8', (err) => {
+            if (err) {
+                console.error('Error writing to the file: ', err);
+                return;
+            }
+            console.log("File cleaned successfully.");
+        })
+    })
 }
 
-const filename = 'a.txt';
-cleanFile(filename);
-
-
+const filePath = 'example.txt';
+cleanFile(filePath);
 

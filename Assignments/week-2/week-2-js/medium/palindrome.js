@@ -4,10 +4,27 @@
 */
 
 function isPalindrome(str) {
-  const lowercaseStr = str.toLowerCase();
-  const filteredStr = lowercaseStr.split("").filter((char) => (char !== '?' && char !== ' ' && char !== '!' && char !== '.' && char !== ',')).join('');
-  const reverseStr = filteredStr.split("").reverse().join("");
-  return filteredStr === reverseStr;
+  let filteredStr = '';
+  for (char of str) {
+    if ((char >= 'a' && char <= 'z' || char >= 'A' && char <= 'Z' || char >= '0' && char <= '9')) {
+      filteredStr += char.toLowerCase();
+    }
+  }
+
+  let left = 0;
+  let right = filteredStr.length - 1;
+
+  while (left < right) {
+    if (filteredStr[left] !== filteredStr[right]) {
+      return false;
+    }
+    left++;
+    right--;
+  }
+  return true;
 }
+
+console.log(isPalindrome("abc ddcba"));
+
 
 module.exports = isPalindrome;

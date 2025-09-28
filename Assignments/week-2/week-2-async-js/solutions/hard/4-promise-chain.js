@@ -25,7 +25,7 @@ function calculateTime(t1, t2, t3) {
 function call(t1, t2, t3) {
     return wait1(t1)
         .then(function () {
-            return wait2(t2);
+            return wait2(t2);   
         })
         .then(function () {
             return wait3(t3);

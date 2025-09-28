@@ -4,11 +4,13 @@
 
 function wait(n) {
     let p = new Promise((resolve) => {
-      setTimeout(() => {
-        resolve();
-      }, n * 1000);
-    });
+        setTimeout(() => {
+            resolve();
+        }, n * 1000)
+    })
     return p;
 }
+
+wait(4);
 
 module.exports = wait;

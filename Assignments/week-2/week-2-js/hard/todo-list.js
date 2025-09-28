@@ -11,40 +11,47 @@
 */
 
 class Todo {
-  constructor(){
+  constructor() {
     this.todos = [];
   }
 
-  add(todo){
+  add(todo) {
     this.todos.push(todo);
-  }
+  } 
 
-  remove(indexOfTodo){
-    this.todos.splice(indexOfTodo, 1);
-  }
-
-  update(index, updatedTodo){
-    if(index < 0 || index >= this.todos.length){
-      return;
+  remove(indexOfTodo) {
+    if (indexOfTodo >= 0 && indexOfTodo <= this.todos.length) {
+      this.todos.splice(indexOfTodo, 1);
     }
-    this.todos[index] = updatedTodo;
   }
 
-  getAll(){
+  update(index, updatedTodo) {
+    if (index >= 0 && index <= this.todos.length) {
+      this.todos[index] = updatedTodo;
+    }
+  }
+
+  getAll() {
     return this.todos;
   }
 
-  get(indexOfTodo){
-    if(indexOfTodo < 0 || indexOfTodo > this.todos.length){
-      return null;
+  get(indexOfTodo) {
+    if (indexOfTodo >= 0 && indexOfTodo <= this.todos.length) {
+      return this.todos[indexOfTodo];
     }
-    return this.todos[indexOfTodo];
+    return null;
   }
 
-  clear(){
-    this.todos= [];
+  clear() {
+    this.todos = [];
   }
-
 }
+
+let todoList = new Todo();
+todoList.add('Task 1');
+todoList.add("Task 2");
+
+console.log(todoList.getAll());
+
 
 module.exports = Todo;

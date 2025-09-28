@@ -9,7 +9,10 @@ function sleep(milliseconds) {
         let startTime = new Date().getTime();
         while (new Date().getTime() < startTime + milliseconds);
         resolve();
-    });
+    })
 }
+
+sleep(4000)
+
 
 module.exports = sleep;
