@@ -1,25 +1,21 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>BG Color Changer</title>
-    <link rel="stylesheet" href="style.css">
-</head>
-<body>
-    <div class="main">
-        <div class="color-buttons">
-            <!-- <button id="red-button">Red</button> -->
-            <div id="custom-colors"></div>
-        </div>
-        <div class="color-input">
-            <input type="text" id="color-input" placeholder="Enter custom color">
-            <button id="add-color">Add Color</button>
-        </div>
+    <link rel="stylesheet" href="style.css" />
+  </head>
+  <body>
+    <div id="root">
+      <div id="addColor">
+        <p>Add Color:</p>
+        <input id="input" type="text" />
+        <button class="btn" onclick="addColor()">Add</button>
+      </div>
+      <div id="btnParent"></div>
     </div>
 
-
     <script src="script.js"></script>
-
-</body>
+  </body>
 </html>

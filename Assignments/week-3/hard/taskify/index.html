@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Taskify</title>
+    <link rel="stylesheet" href="style.css" />
+  </head>
+  <body>
+    <div id="root">
+      <div id="todo" class="cat">
+        <div class="title">
+          <h3>To Do</h3>
+          <img
+            src="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIyNCIgaGVpZ2h0PSIyNCIgdmlld0JveD0iMCAwIDI0IDI0Ij48cGF0aCBmaWxsPSJub25lIiBzdHJva2U9ImN1cnJlbnRDb2xvciIgc3Ryb2tlLWxpbmVjYXA9InJvdW5kIiBzdHJva2UtbGluZWpvaW49InJvdW5kIiBzdHJva2Utd2lkdGg9IjIiIGQ9Ik01IDE3aDE0TTUgMTJoMTRNNSA3aDgiLz48L3N2Zz4="
+            alt="menu"
+          />
+        </div>
+        <div class="cards"></div>
+        <button type="button" class="btn">
+          <span>Add new</span>
+          <img
+            src="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIyNCIgaGVpZ2h0PSIyNCIgdmlld0JveD0iMCAwIDI0IDI0Ij48cGF0aCBmaWxsPSIjZmZmIiBkPSJNMTEgMTNINXYtMmg2VjVoMnY2aDZ2MmgtNnY2aC0yeiIvPjwvc3ZnPg=="
+            alt="add"
+          />
+        </button>
+      </div>
+      <div id="inProg" class="cat">
+        <div class="title">
+          <h3>In Progress</h3>
+          <img
+            src="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIyNCIgaGVpZ2h0PSIyNCIgdmlld0JveD0iMCAwIDI0IDI0Ij48cGF0aCBmaWxsPSJub25lIiBzdHJva2U9ImN1cnJlbnRDb2xvciIgc3Ryb2tlLWxpbmVjYXA9InJvdW5kIiBzdHJva2UtbGluZWpvaW49InJvdW5kIiBzdHJva2Utd2lkdGg9IjIiIGQ9Ik01IDE3aDE0TTUgMTJoMTRNNSA3aDgiLz48L3N2Zz4="
+            alt="menu"
+          />
+        </div>
+        <div class="cards"></div>
+        <button type="button" class="btn">
+          <span>Add new</span>
+          <img
+            src="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIyNCIgaGVpZ2h0PSIyNCIgdmlld0JveD0iMCAwIDI0IDI0Ij48cGF0aCBmaWxsPSIjZmZmIiBkPSJNMTEgMTNINXYtMmg2VjVoMnY2aDZ2MmgtNnY2aC0yeiIvPjwvc3ZnPg=="
+            alt="add"
+          />
+        </button>
+      </div>
+      <div id="unReview" class="cat">
+        <div class="title">
+          <h3>Under Review</h3>
+          <img
+            src="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIyNCIgaGVpZ2h0PSIyNCIgdmlld0JveD0iMCAwIDI0IDI0Ij48cGF0aCBmaWxsPSJub25lIiBzdHJva2U9ImN1cnJlbnRDb2xvciIgc3Ryb2tlLWxpbmVjYXA9InJvdW5kIiBzdHJva2UtbGluZWpvaW49InJvdW5kIiBzdHJva2Utd2lkdGg9IjIiIGQ9Ik01IDE3aDE0TTUgMTJoMTRNNSA3aDgiLz48L3N2Zz4="
+            alt="menu"
+          />
+        </div>
+        <div class="cards"></div>
+        <button type="button" class="btn">
+          <span>Add new</span>
+          <img
+            src="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIyNCIgaGVpZ2h0PSIyNCIgdmlld0JveD0iMCAwIDI0IDI0Ij48cGF0aCBmaWxsPSIjZmZmIiBkPSJNMTEgMTNINXYtMmg2VjVoMnY2aDZ2MmgtNnY2aC0yeiIvPjwvc3ZnPg=="
+            alt="add"
+          />
+        </button>
+      </div>
+      <div id="finish" class="cat">
+        <div class="title">
+          <h3>Finised</h3>
+          <img
+            src="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIyNCIgaGVpZ2h0PSIyNCIgdmlld0JveD0iMCAwIDI0IDI0Ij48cGF0aCBmaWxsPSJub25lIiBzdHJva2U9ImN1cnJlbnRDb2xvciIgc3Ryb2tlLWxpbmVjYXA9InJvdW5kIiBzdHJva2UtbGluZWpvaW49InJvdW5kIiBzdHJva2Utd2lkdGg9IjIiIGQ9Ik01IDE3aDE0TTUgMTJoMTRNNSA3aDgiLz48L3N2Zz4="
+            alt="menu"
+          />
+        </div>
+        <div class="cards"></div>
+        <button type="button" class="btn">
+          <span>Add new</span>
+          <img
+            src="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIyNCIgaGVpZ2h0PSIyNCIgdmlld0JveD0iMCAwIDI0IDI0Ij48cGF0aCBmaWxsPSIjZmZmIiBkPSJNMTEgMTNINXYtMmg2VjVoMnY2aDZ2MmgtNnY2aC0yeiIvPjwvc3ZnPg=="
+            alt="add"
+          />
+        </button>
+      </div>
+    </div>
+    <div id="form">
+      <form action="">
+        <label for="category">Category: </label>
+        <select name="category" id="category">
+          <option value="todo">Todo</option>
+          <option value="inProg">In Progress</option>
+          <option value="unReview">Under Review</option>
+          <option value="finish">Finised</option>
+        </select>
+        <label for="title">Title: </label>
+        <input
+          type="text"
+          name="title"
+          id="title"
+          placeholder="Enter the Title"
+        />
+        <label for="desc">Description: </label>
+        <input
+          type="text"
+          name="desc"
+          id="desc"
+          placeholder="Enter the Description"
+        />
+        <label for="type">Type: </label>
+        <select name="type" id="type">
+          <option value="easy">Easy</option>
+          <option value="mid">Medium</option>
+          <option value="hard">Hard</option>
+        </select>
+        <label for="date">Date: </label>
+        <input type="datetime-local" name="date" id="date" />
+        <button id="addBtn" type="button">Add Todo</button>
+      </form>
+    </div>
+
+    <script type="module" src="script.js"></script>
+  </body>
+</html>

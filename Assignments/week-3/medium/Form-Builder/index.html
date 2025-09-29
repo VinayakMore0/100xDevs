@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Form Builder</title>
+    <link rel="stylesheet" href="style.css" />
+  </head>
+  <body>
+    <div id="root">
+      <div class="form">
+        <h3>Form Builder</h3>
+        <form id="builderForm">
+          <label for="feild">Selet Feild Type</label>
+          <select name="feild" id="feild">
+            <option value="input">Text Input</option>
+            <option value="checkbox">Checkbox</option>
+            <option value="radio">Radio</option>
+          </select>
+          <label for="label">Feild Label</label>
+          <input
+            type="text"
+            name="label"
+            id="label"
+            placeholder="Enter feild label"
+          />
+          <button id="addBtn" type="button">Add Feild</button>
+        </form>
+      </div>
+      <div class="form">
+        <h3>Form Preview</h3>
+        <div id="preview">
+          <form id="previewForm" action=""></form>
+        </div>
+      </div>
+    </div>
+
+    <script type="module" src="script.js"></script>
+  </body>
+</html>

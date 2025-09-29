@@ -1,77 +1,52 @@
-document.addEventListener('DOMContentLoaded', () => {
-    // Get form elements
-    const form = document.getElementById('pokemon-form');
-    const numCardsInput = document.getElementById('num-cards');
-    const categorySelect = document.getElementById('category');
-    const submitBtn = document.getElementById('submit-btn');
-    const pokemonCardsContainer = document.getElementById('pokemon-cards');
+async function render() {
+  document.getElementById("form").addEventListener("submit", async (e) => {
+    e.preventDefault();
+    const idInput = document.querySelector("#id");
+    const id = idInput.value.trim();
 
-    // Check if elements exist
-    if (!form || !numCardsInput || !categorySelect || !submitBtn || !pokemonCardsContainer) {
-        alert("Required elements not found. Check your HTML IDs.");
-        console.error('Required elements not found. Check your HTML IDs.');
-        return;
+    if (!id) {
+      alert("Please enter an id!");
+      return;
     }
 
-    // API endpoint base URL
-    const apiBaseUrl = 'https://pokeapi.co/api/v2/pokemon/';
+    try {
+      const response = await fetch(`https://pokeapi.co/api/v2/pokemon/${id}`);
+      if (response.ok) {
+        const data = await response.json();
+        console.log(data);
 
-    // Category to type mapping
-    const categoryToType = {
-        'all': '',
-        'normal': 'normal',
-        'fire': 'fire',
-        'water': 'water',
-        'grass': 'grass'
-    };
+        // Extract lists
+        const abilities = data.abilities.map((a) => a.ability.name).join(", ");
+        const moves = data.moves
+          .slice(0, 5)
+          .map((m) => m.move.name)
+          .join(", "); // limit to 5
+        const stats = data.stats
+          .map((s) => `${s.stat.name}: ${s.base_stat}`)
+          .join("<br>");
+        const types = data.types.map((t) => t.type.name).join(", ");
 
-    // Handle form submission 
-    form.addEventListener('submit', async (e) => {
-        e.preventDefault();
-        const pokemonNumber = parseInt(numCardsInput.value);
-        const selectCategory = categorySelect.value;
-        const targetType = categoryToType[selectCategory];
-
-        try {
-            const response = await fetch(`${apiBaseUrl}${pokemonNumber}`);
-            const pokemonData = await response.json();
-            
-            // Check if type matches (if a specific type is selected)
-            if (targetType && !pokemonData.types.some(t => t.type.name === targetType)) {
-                pokemonCardsContainer.innerHTML = '<p>No Pokemon of selected type found with this number.</p>';
-                return;
-            }
-
-            // Clear previous cards and render the new one
-            pokemonCardsContainer.innerHTML = '';
-            renderPokemonCard(pokemonData);
-        } catch (error) {
-            console.error(`Error fetching Pokémon #${pokemonNumber}:`, error);
-            pokemonCardsContainer.innerHTML = '<p>Pokemon not found. Try a different number.</p>';
-        }
-    });
-
-    // Render a single Pokémon card
-    function renderPokemonCard(pokemonData) {
-        const cardHTML = `
-        <div class="pokemon-card">
-            <img src="${pokemonData.sprites.front_default}" alt="${pokemonData.name}">
-            <h2>#${pokemonData.id} ${pokemonData.name}</h2>
-            <p>Type: ${pokemonData.types.map(t => t.type.name).join(', ')}</p>
-        </div>
+        document.getElementById("main").innerHTML = `
+          <div id="card">
+              <div id="info">
+                  <p>#${data.id} ${data.name}</p>
+                  <img src="${data.sprites.front_default}" alt="${data.name}">
+                  <p><strong>Height:</strong> ${data.height}' | <strong>Weight:</strong> ${data.weight} lbs</p>
+                  <p><strong>Base Exp:</strong> ${data.base_experience} | <strong>Order:</strong> ${data.order}</p>
+                  <p><strong>Abilities:</strong> ${abilities}</p>
+                  <p><strong>Moves:</strong> ${moves}</p>
+                  <p><strong>Stats:</strong><br>${stats}</p>
+                  <p><strong>Types:</strong> ${types}</p>
+              </div>
+          </div>
         `;
-
-        pokemonCardsContainer.insertAdjacentHTML('beforeend', cardHTML);
+      } else {
+        alert("Pokemon not found!");
+      }
+    } catch (error) {
+      console.error(error);
     }
+  });
+}
 
-    // Input validation
-    numCardsInput.addEventListener('input', () => {
-        const number = parseInt(numCardsInput.value);
-        // Pokemon API has around 1000 Pokemon
-        if (number < 1 || number > 1000) {
-            submitBtn.disabled = true;
-        } else {
-            submitBtn.disabled = false;
-        }
-    });
-});
+render();

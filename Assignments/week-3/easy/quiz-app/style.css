@@ -1,70 +1,112 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: Verdana, Geneva, Tahoma, sans-serif;
+}
+
+html,
 body {
-    font-family: Verdana, Geneva, Tahoma, sans-serif;
-    text-align: center;
-    padding: 20px;
+  width: 100%;
+  height: 100%;
 }
 
-h1 {
-    margin-bottom: 20px;
+#root {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: lightcyan;
 }
 
-.questions {
-    margin-bottom: 20px;
+#card {
+  width: 40em;
+  height: 30em;
+  background-color: #fff;
+  display: grid;
+  border-radius: 0.5em;
+  box-shadow: 0em 0em 2em lightgray;
+  overflow: hidden;
 }
 
-.answer-options {
-    display: grid;
-    grid-template-columns: repeat(2, 1fr);
-    grid-gap: 10px;
-    margin-bottom: 20px;
+#form {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: center;
 }
 
-.answer-options button {
-    background-color: #f1f1f1;
-    border: none;
-    padding: 10px 20px;
-    text-align: left;
-    text-decoration: none;
-    display: inline-block;
-    font-size: 16px;
-    cursor: pointer;
+#ques {
+  width: 100%;
+  height: 85%;
+  display: flex;
+  flex-direction: column;
+  justify-content: start;
+  padding: 2em 4em;
 }
 
-.answer-options button.selected {
-    background-color: #4CAF50;
-    color: whitesmoke;
+#title {
+  width: 100%;
+  height: 45%;
+  text-align: center;
+  padding: 3em 0;
 }
 
-#submit-btn {
-    background-color: #4CAF50;
-    color: whitesmoke;
-    border: none;
-    padding: 10px 20px;
-    text-align: center;
-    text-decoration: none;
-    display: inline-block;
-    font-size: 16px;
-    cursor: pointer;
+#radio {
+  width: 100%;
+  height: 55%;
+  display: flex;
+  flex-direction: column;
+  gap: 1em;
 }
 
-#result {
-    margin-top: 20px;
-    font-size: 18px;
-    font-weight: bold;
+label {
+  font-size: large;
+  cursor: pointer;
 }
 
-.answer-options button:hover {
-    background-color: #e0e0e0;
-    transition: background-color 0.2s ease;
+.radioText input {
+  cursor: pointer;
 }
 
-.answer-options button.selected:hover {
-    background-color: #45a049;
+#submit {
+  width: 100%;
+  height: 15%;
 }
 
-@media (max-width: 600px) {
-    .answer-options {
-        grid-template-columns: 1fr;
-    }
+#submit input {
+  height: 100%;
+  width: 100%;
+  border: none;
+  font-size: 1.2em;
+  color: #fff;
+  background-color: purple;
+  cursor: pointer;
 }
 
+#resultCard {
+  width: 40em;
+  height: 10em;
+  background-color: #fff;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: center;
+  padding-top: 2.2em;
+  border-radius: 0.5em;
+  box-shadow: 0em 0em 2em lightgray;
+  overflow: hidden;
+}
+
+#restart {
+  height: 45%;
+  width: 100%;
+  border: none;
+  font-size: 1.2em;
+  color: #fff;
+  background-color: purple;
+  cursor: pointer;
+}

@@ -1,66 +1,42 @@
-const express = require("express");
-const app = express();
-let count = 0;
+const jwt = require("jsonwebtoken");
+const jwtPassword = "secret";
+const zod = require("zod");
 
-app.get("/admin", function(req, res) {
-    res.json({
-        "Total number of request to the server were": count
-    })
-})
+const emailSchema = zod.string().email();
+const passwordSchema = zod.string().min(6);
 
-app.use(function(req, res, next) {
-    count++;
-    console.log("Request Received");
-    console.log("Method was " + req.method);
-    console.log("Host was " + req.hostname);
-    console.log("URL was " + req.url);
-    console.log("Time Stamp was " + new Date());
-    next();
-})
+function signJwt(username, password) {
+    const usernameResponse = emailSchema.safeParse(username);
+    const passwordResponse = passwordSchema.safeParse(password);
 
-app.get("/sum", function(req, res) {
-    const a = parseInt(req.query.a);
-    const b = parseInt(req.query.b);
+    if (!usernameResponse.success || !passwordResponse) {
+        return null;
+    }
 
-    res.json({
-        ans: a + b
-    })
-})
+    const signature = jwt.sign({
+        username,
+    }, jwtPassword)
+    return signature;
+}
 
-app.get("/multiply", function(req, res) {
-    const a = req.query.a;
-    const b = req.query.b;
+function verifyJwt (token) {
+    let ans = true;
+    try {
+        jwt.verify(token, jwtPassword);
+    } catch (err) {
+        ans = false;
+    }
+    return ans;
+}
 
-    res.json({
-        ans: a * b
-    })
-})
+function decodeJwt (token) {
+    const decoded = jwt.decode(token);
+    if (decoded) {
+        return true;
+    } else {
+        return false;
+    }
+}
 
-app.get("/divide", function(req, res) {
-    const a = req.query.a;
-    const b = req.query.b;
 
-    res.json({
-        ans: a / b
-    })
-})
 
-app.get("/substract", function(req, res) {
-    const a = parseInt(req.query.a);
-    const b = parseInt(req.query.b);
-
-    res.json({
-        ans: a - b
-    })
-})
-
-app.get("/add/:a/:b", function(req, res) {
-    const a = parseInt(req.params.a);
-    const b = parseInt(req.params.b);   
-
-    res.json({
-        ans: a + b
-    })
-})
-
-app.listen(3000);

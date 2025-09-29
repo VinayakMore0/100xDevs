@@ -1,47 +1,27 @@
-const body = document.body;
-// const redButton = document.getElementById('red-button');
-const customColorsContainer = document.getElementById('custom-colors');
-const colorInput = document.getElementById('color-input');
-const addColorButton = document.getElementById('add-color');
+const colors = ["Red", "Yellow", "Black", "Purple", "Green", "Blue", "White"];
 
-let customColors = [
-    'Red',
-    'Yellow',
-    'Black',
-    'Purple',
-    'Green',
-    'Blue',
-    'Default'
-];
-
-function renderCustomColors() {
-    customColorsContainer.innerHTML = '';
-    customColors.forEach(color => {
-        const button = document.createElement('button');
-        button.style.backgroundColor = color;
-        button.style.color = '#fff';
-        button.textContent = color;
-        button.addEventListener('click', () => setBackgroundColor(color));
-        customColorsContainer.appendChild(button);
-    });
+function addColor(color) {
+  colors.push(document.querySelector("input").value);
+  render(colors);
 }
 
-function setBackgroundColor(color) {
-    body.style.backgroundColor = color;
-} 
+function createColorBtn(color) {
+  const btn = document.createElement("button");
+  btn.innerHTML = color;
+  btn.className = "btn";
+  btn.style.backgroundColor = color;
+  btn.onclick = () => {
+    document.querySelector("#root").style.backgroundColor = color;
+  };
+  return btn;
+}
 
-// redButton.addEventListener('click', () =>   setBackgroundColor('#ff0000'));
+function render(colors) {
+  document.querySelector("#btnParent").innerHTML = "";
+  for (let i = 0; i < colors.length; i++) {
+    const elem = createColorBtn(colors[i]);
+    document.querySelector("#btnParent").appendChild(elem);
+  }
+}
 
-addColorButton.addEventListener('click', () => {
-    const newColor = colorInput.value.trim();
-    if (newColor) {
-        customColors.push(newColor);
-        renderCustomColors();
-        colorInput.value = '';
-    }
-});
-
-renderCustomColors();
-
-
-
+render(colors);
